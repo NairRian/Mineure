@@ -10,5 +10,9 @@ st.title('Bonjour !')
 
 df = pd.DataFrame(values, columns=feature_names)
 
+plot =df['alcohol']
+st.write('Voici le graphique de la colonne alcohol : ')
+st.line_chart()
+
 df
 
