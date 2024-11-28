@@ -35,7 +35,7 @@ st.sidebar.markdown("## Choix des graphiques ou map que vous souhaitez afficher 
 # Partie Raph
 st.sidebar.subheader("Lien entre les types de roche, de tectonique et d'éruption")
 
-raph = st.checkbox("Afficher le graphique")
+raph = st.sidebar.checkbox("Afficher le graphique")
 
 # ANALYSE SELON TYPE DE ROCHES, D'ERUPTION ET DE TECTONIQUE
 # réduire l'excel aux colonnes qui nous intéressent
