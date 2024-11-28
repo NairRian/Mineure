@@ -91,6 +91,7 @@ p0 = np.round(p0, 2)
 st.sidebar.subheader("Répartition des volcans émergés et submergés")
 youyou = st.sidebar.checkbox("Afficher la répartition des volcans par rapport au niveau de la mer")
 if youyou :
+    st.subheader("Les volcans VS la mer...")
     st.write(p, "%", "des volcans de l'Holocène sont aujourd'hui au dessus du niveau de la mer et",p2,"% sont en dessous!")
     st.write("et oui, on voit donc que presque",p0,"% des volcans de l'holocène sont aujourd'hui au niveau de la mer !")
 
@@ -104,7 +105,7 @@ pays = st.sidebar.selectbox("Quel pays ?", liste_pays)
 alex = st.sidebar.checkbox("Afficher infos du pays")
 
 if alex :
-    st.subheader(f"Informations volcanologiques  : {pays}")
+    st.subheader(f"{pays} VS ses volcans !")
     data_pays = df[df['Country'] == pays][['Country', 'Type', 'Last Known Eruption', 'Name']]
     #Condition pour si le pays choisi n'est pas dans la database
     if pays in df['Country'].values:
@@ -125,7 +126,6 @@ if alex :
         st.write(f"Le pays {pays} n'est pas le jeu de donné.")
 
 ###################################################################
-st.subheader("Lien entre les types de roche, tectonique et éruption")
 
 # PARTIE 1 RAPH
 st.sidebar.subheader("Lien entre les types de roche, de tectonique et d'éruption")
@@ -153,6 +153,7 @@ tectonic_setting = st.sidebar.selectbox("Quel cas tectonique ?", liste_tecto)
 raph = st.sidebar.checkbox("Afficher le graphique")
 
 if raph :
+    st.subheader("Une roche & une tectonique : quelle éruption ????")
     st.write(f"Vous avez choisi : {rock_type} et {tectonic_setting}")
     if (rock_type, tectonic_setting) in type_stats.index:
         type_counts = type_stats.loc[(rock_type, tectonic_setting)] # loc permet de créer un tableau qui répertorie les types de roche et leur itération
@@ -192,6 +193,7 @@ eruption_type = st.sidebar.selectbox("Quel type d'éruption ?", liste_type)
 raphbis = st.sidebar.checkbox("Afficher la heatmap")
 
 if raphbis :
+    st.subheader("Une éruption : quelle proba d'origine ???")
     st.write(f"Vous avez choisi : {eruption_type}")
     
     if eruption_type in type_stats.columns:
