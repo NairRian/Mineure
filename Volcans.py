@@ -177,7 +177,7 @@ for i in choix_carte :
         st.plotly_chart(fig_submerges, use_container_width=True)
     elif i == cartes[3] :
         # Filtrer les volcans au niveau de la mer (élévation == 0)
-        data_0 = data[data['Elevation (Meters)'] == 0]
+        data_0 = df[df['Elevation (Meters)'] == 0]
         
         # Créer la carte avec Plotly
         fig_0 = px.scatter_mapbox(
