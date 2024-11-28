@@ -96,7 +96,8 @@ if st.sidebar.checkbox("Afficher la répartition des volcans par rapport au nive
 
 cartes = st.sidebar.multiselect("Quelles cartes souhaitez-vous afficher ?", ["Carte générale", "Carte des volcans submergés", "Carte des volcans émergés", "Carte des volcans au niveau de la mer"])
 
-st.write(cartes)
+for i in cartes :
+    st.write(i)
 
 if st.sidebar.checkbox("Afficher la cartes des volcans de l'Holocène") :
     # Créer la carte avec Plotly Express
