@@ -11,8 +11,11 @@ feature_names = load_wine().feature_names
 
 st.title("Les volcans de l'Holocène")
 
+uploaded_file = st.file_uploader("Choisissez un fichier CSV", type=["csv"])
+
 df = pd.DataFrame(values, columns=feature_names)
-st.dataframe(df.style.highlight_max(axis=0))
+st.dataframe(df)
+# st.dataframe(df.style.highlight_max(axis=0)) surligne la valeur max de la colonne
 plot =df['alcohol']
 
 bot = st.checkbox("Afficher le graphique de la colonne alcohol : ")
