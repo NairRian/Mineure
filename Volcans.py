@@ -69,7 +69,39 @@ st.markdown("""
 ###################################################################
 
 # configuration de la sidebar
-st.sidebar.title("Choix des graphiques ou map que vous souhaitez afficher : ")
+st.sidebar.title("Choix des informations que vous souhaitez afficher : ")
+
+###################################################################
+st.sidebar.subheader("Informations volcanologiques pour un pays")
+
+# PARTIE ALEXANDRE
+
+#Choix du nom du pays
+liste_pays = list(set(df['Country'].values))
+pays = st.sidebar.selectbox("Quel pays ?", liste_pays)
+data_pays = df[df['Country'] == pays][['Country', 'Type', 'Last Known Eruption', 'Name']]
+#Condition pour si le pays choisi n'est pas dans la database
+if pays in df['Country'].values:
+# Trouver la dernière date d'éruption
+  derniere_eruption = max(data_pays['Last Known Eruption'])
+
+# Récupérer le ou les noms des volcans associés à cette éruption
+  volcans_derniere_eruption = data_pays[data_pays['Last Known Eruption'] == derniere_eruption]['Name']
+
+# Compter les types d'éruption
+  type_eruption = data_pays['Type'].value_counts()
+
+# Affichage des résultats
+  print(f"La dernière éruption connue est datée de {derniere_eruption}.")
+  print(f"Le(s) volcan(s) associé(s) à cette éruption : {', '.join(volcans_derniere_eruption)}")
+  print("Type d'éruptions dans ce pays :\n", type_eruption)
+else:
+    print(f"Le pays {pays} n'est pas le jeu de donné.")
+
+
+
+
+
 
 ###################################################################
 st.subheader("Lien entre les types de roche, tectonique et éruption")
