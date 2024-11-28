@@ -231,7 +231,7 @@ if st.sidebar.checkbox("Afficher infos du pays") :
 ###################################################################
 
 # PARTIE 1 RAPH
-st.sidebar.subheader("Lien entre les types de roche, de tectonique et d'éruption")
+st.sidebar.subheader("Une roche dominante et un cas tectonique : quelle(s) éruption(s) possible(s) ?")
 
 # ANALYSE SELON TYPE DE ROCHES, D'ERUPTION ET DE TECTONIQUE
 # réduire l'excel aux colonnes qui nous intéressent
@@ -291,6 +291,7 @@ if st.sidebar.checkbox("Afficher le graphique") :
 # en considérant que la probabilité d'occurence est égale à la probabilité que ce binôme 'Dominant Rock Type' et 'Tectonic Setting' donne ce type d'éruption par rapport à tous les types d'éruption qu'il peut former
 
 # demander le type d'éruption
+st.sidebar.subheader("Une éruption : quels combos de roche dominante et de cas tectonique ? ")
 eruption_type = st.sidebar.selectbox("Quel type d'éruption ?", liste_type)
 
 if st.sidebar.checkbox("Afficher la heatmap") :
