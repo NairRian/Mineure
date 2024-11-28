@@ -65,13 +65,34 @@ st.title("Les volcans de l'Holocène")
 
 st.markdown("""
  * Utiliser le menu pour choisir ce que vous souhaitez afficher
- * Ci-dessous parait vos choix
+ * Ci-dessous apparaissent vos choix
 """)
 
 ###################################################################
 
 # configuration de la sidebar
 st.sidebar.title("Choix des informations que vous souhaitez afficher : ")
+
+###################################################################
+
+# PARTIE YOUYOU
+# calculs de pourcentage
+data_emerges = df[df['Elevation (Meters)'] > 0]
+p = (data_emerges.shape[0]/df.shape[0])*100
+p = np.round(p, 2)
+data_submerges = df[df['Elevation (Meters)'] < 0]
+p2 = (data_submerges.shape[0]/df.shape[0])*100
+p2 = np.round(p2, 2)
+data_0 = df[df['Elevation (Meters)'] == 0]
+p0 = (data_0.shape[0]/df.shape[0])*100
+p0 = np.round(p0, 2)
+
+# mise en page
+st.sidebar.subheader("Répartition des volcans émergés et submergés")
+youyou = st.sidebar.checkbox("Afficher la répartition des volcans par rapport au niveau de la mer")
+if youyou :
+    st.write(p, "%", "des volcans de l'Holocène sont aujourd'hui au dessus du niveau de la mer et",p2,"% sont en dessous!")
+    st.write("et oui, on voit donc que presque",p0,"% des volcans de l'holocène sont aujourd'hui au niveau de la mer !")
 
 ###################################################################
 st.sidebar.subheader("Informations volcanologiques pour un pays")
@@ -81,7 +102,6 @@ st.sidebar.subheader("Informations volcanologiques pour un pays")
 liste_pays = list(set(df['Country'].values))
 pays = st.sidebar.selectbox("Quel pays ?", liste_pays)
 alex = st.sidebar.checkbox("Afficher infos du pays")
-
 
 if alex :
     st.subheader(f"Informations volcanologiques  : {pays}")
@@ -201,4 +221,9 @@ if raphbis :
         st.pyplot(fig)
     else:
         st.write(f"Le type d'éruption '{eruption_type}' n'existe pas dans les données.")
+
+
+###################################################################
+
+
 
