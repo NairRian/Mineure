@@ -89,8 +89,7 @@ p0 = np.round(p0, 2)
 
 # mise en page
 st.sidebar.subheader("Répartition des volcans émergés et submergés")
-youyou = st.sidebar.checkbox("Afficher la répartition des volcans par rapport au niveau de la mer")
-if youyou :
+if st.sidebar.checkbox("Afficher la répartition des volcans par rapport au niveau de la mer") :
     st.subheader("Les volcans VS la mer...")
     st.write(p, "%", "des volcans de l'Holocène sont aujourd'hui au dessus du niveau de la mer et",p2,"% sont en dessous!")
     st.write("et oui, on voit donc que presque",p0,"% des volcans de l'holocène sont aujourd'hui au niveau de la mer !")
@@ -120,9 +119,8 @@ st.sidebar.subheader("Informations volcanologiques pour un pays")
 #Choix du nom du pays
 liste_pays = list(set(df['Country'].values))
 pays = st.sidebar.selectbox("Quel pays ?", liste_pays)
-alex = st.sidebar.checkbox("Afficher infos du pays")
 
-if alex :
+if st.sidebar.checkbox("Afficher infos du pays") :
     st.subheader(f"{pays} VS ses volcans !")
     data_pays = df[df['Country'] == pays][['Country', 'Type', 'Last Known Eruption', 'Name']]
     #Condition pour si le pays choisi n'est pas dans la database
@@ -168,9 +166,8 @@ type_stats = (
 # demander le binôme
 rock_type = st.sidebar.selectbox("Quel type de roche ?", liste_rock)
 tectonic_setting = st.sidebar.selectbox("Quel cas tectonique ?", liste_tecto)
-raph = st.sidebar.checkbox("Afficher le graphique")
 
-if raph :
+if st.sidebar.checkbox("Afficher le graphique") :
     st.subheader("Une roche & une tectonique : quelle éruption ????")
     st.write(f"Vous avez choisi : {rock_type} et {tectonic_setting}")
     if (rock_type, tectonic_setting) in type_stats.index:
@@ -208,9 +205,8 @@ if raph :
 
 # demander le type d'éruption
 eruption_type = st.sidebar.selectbox("Quel type d'éruption ?", liste_type)
-raphbis = st.sidebar.checkbox("Afficher la heatmap")
 
-if raphbis :
+if st.sidebar.checkbox("Afficher la heatmap") :
     st.subheader("Une éruption : quelle proba d'origine ???")
     st.write(f"Vous avez choisi : {eruption_type}")
     
