@@ -94,28 +94,109 @@ if st.sidebar.checkbox("Afficher la répartition des volcans par rapport au nive
     st.write(p, "%", "des volcans de l'Holocène sont aujourd'hui au dessus du niveau de la mer et",p2,"% sont en dessous!")
     st.write("et oui, on voit donc que presque",p0,"% des volcans de l'holocène sont aujourd'hui au niveau de la mer !")
 
-cartes = st.sidebar.multiselect("Quelles cartes souhaitez-vous afficher ?", ["Carte générale", "Carte des volcans submergés", "Carte des volcans émergés", "Carte des volcans au niveau de la mer"])
+cartes = ["Carte générale", "Carte des volcans submergés", "Carte des volcans émergés", "Carte des volcans au niveau de la mer"]
+choix_carte = st.sidebar.multiselect("Quelles cartes souhaitez-vous afficher ?", cartes)
 
-for i in cartes :
-    st.write(i)
-
-if st.sidebar.checkbox("Afficher la cartes des volcans de l'Holocène") :
-    # Créer la carte avec Plotly Express
-    fig = px.scatter_mapbox(
-        df, 
-        lat="Latitude", 
-        lon="Longitude", 
-        zoom=1,
-        mapbox_style="carto-positron"
-    )
-    fig.update_layout(
-        width=1200,
-        height=800,
-        title_text="Carte de la localisation des volcans de l'Holocène"
-    )
-    
-    # Afficher la carte dans Streamlit
-    st.plotly_chart(fig, use_container_width=True)
+for i in choix_carte :
+    if i == cartes[0] :
+        # Créer la carte avec Plotly Express
+        fig = px.scatter_mapbox(
+            df, 
+            lat="Latitude", 
+            lon="Longitude", 
+            zoom=1,
+            mapbox_style="carto-positron"
+        )
+        fig.update_layout(
+            width=1200,
+            height=800,
+            title_text="Carte de la localisation des volcans de l'Holocène"
+        )
+        
+        # Afficher la carte dans Streamlit
+        st.plotly_chart(fig, use_container_width=True)
+    elif i == cartes[1] :
+        # Convertir la colonne "Elevation (Meters)" en float
+        data_emerges["Elevation (Meters)"] = data_emerges["Elevation (Meters)"].apply(float)
+        # Créer le graphique avec Plotly
+        fig_emerges = px.scatter_mapbox(
+            data_emerges, 
+            lat="Latitude", 
+            lon="Longitude", 
+            size="Elevation (Meters)", 
+            color="Elevation (Meters)",
+            color_continuous_scale=px.colors.cyclical.IceFire, 
+            size_max=15, 
+            zoom=1,
+            mapbox_style="carto-positron"  # Style de carte
+        )
+        
+        # Mettre à jour la mise en page du graphique
+        fig_emerges.update_layout(
+            width=1320,
+            height=1000,
+            title_text="Carte de la localisation des volcans émergés"
+        )
+        
+        # Afficher le graphique dans Streamlit
+        st.plotly_chart(fig_emerges, use_container_width=True)
+    elif i == cartes[2] :
+        # Filtrer les volcans submergés (élévation < 0)
+        data_submerges = data[data['Elevation (Meters)'] < 0]
+        
+        # Convertir l'élévation en valeur absolue (profondeur)
+        data_submerges["Elevation (Meters)"] = abs(data_submerges["Elevation (Meters)"])
+        
+        # Renommer la colonne pour la rendre plus claire
+        data_submerges = data_submerges.rename(columns={"Elevation (Meters)": "Profondeur du volcan (par rapport au niveau de la mer)"})
+        
+        # Convertir la colonne en type float (pour assurer que ce soit un nombre flottant)
+        data_submerges["Profondeur du volcan (par rapport au niveau de la mer)"] = data_submerges["Profondeur du volcan (par rapport au niveau de la mer)"].apply(float)
+        
+        # Créer la carte avec Plotly
+        fig_submerges = px.scatter_mapbox(
+            data_submerges, 
+            lat="Latitude", 
+            lon="Longitude", 
+            size="Profondeur du volcan (par rapport au niveau de la mer)", 
+            color="Profondeur du volcan (par rapport au niveau de la mer)",
+            color_continuous_scale=px.colors.cyclical.IceFire, 
+            size_max=15, 
+            zoom=1,
+            mapbox_style="carto-positron"  # Style de la carte (peut être modifié selon vos préférences)
+        )
+        
+        # Mettre à jour la mise en page du graphique
+        fig_submerges.update_layout(
+            width=1570,
+            height=1000,
+            title_text="Carte de la localisation des volcans submergés"
+        )
+        
+        # Afficher le graphique dans Streamlit
+        st.plotly_chart(fig_submerges, use_container_width=True)
+    elif i == cartes[3] :
+        # Filtrer les volcans au niveau de la mer (élévation == 0)
+        data_0 = data[data['Elevation (Meters)'] == 0]
+        
+        # Créer la carte avec Plotly
+        fig_0 = px.scatter_mapbox(
+            data_0, 
+            lat="Latitude", 
+            lon="Longitude", 
+            zoom=1,
+            mapbox_style="carto-positron"  # Style de carte
+        )
+        
+        # Mettre à jour la mise en page du graphique
+        fig_0.update_layout(
+            width=1200,
+            height=800,
+            title_text="Carte de la localisation des volcans au niveau de la mer"
+        )
+        
+        # Afficher le graphique dans Streamlit
+        st.plotly_chart(fig_0, use_container_width=True)
 
 ###################################################################
 st.sidebar.subheader("Informations volcanologiques pour un pays")
