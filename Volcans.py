@@ -170,7 +170,8 @@ for i in choix_carte :
         fig_submerges.update_layout(
             width=1800,
             height=1000,
-            title_text="Carte de la localisation des volcans submergés"
+            title_text="Carte de la localisation des volcans submergés",
+            coloraxis_colorbar_title="Profondeur du volcan (m)"  # Titre personnalisé de la légende
         )
         
         # Afficher le graphique dans Streamlit
