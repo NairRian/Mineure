@@ -97,7 +97,7 @@ if youyou :
 
 # Créer la carte avec Plotly Express
 fig = px.scatter_mapbox(
-    data, 
+    df, 
     lat="Latitude", 
     lon="Longitude", 
     zoom=1,
