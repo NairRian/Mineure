@@ -20,11 +20,11 @@ df = pd.read_csv(csv_path)
 # attention si l'information n'est pas renseignée, erreur : ajouter condition vérifiant que c un string
 suffixes = ['(s)', '(es)', '?']  # Liste des suffixes à supprimer
 
-for i in range(len(data)):
-    if isinstance(data['Type'].iloc[i], str):
+for i in range(len(df)):
+    if isinstance(df['Type'].iloc[i], str):
         for suffix in suffixes:
-            if data['Type'].iloc[i].endswith(suffix):
-                data['Type'].iloc[i] = data['Type'].iloc[i].replace(suffix, '')
+            if df['Type'].iloc[i].endswith(suffix):
+                df['Type'].iloc[i] = df['Type'].iloc[i].replace(suffix, '')
 
 # changer les dates
 
@@ -49,9 +49,9 @@ def convert_date(date_str):
             except ValueError:
                 return np.nan
     return np.nan
-for i in range(len(data)):
-    if isinstance(data['Last Known Eruption'].iloc[i], str):
-            data['Last Known Eruption'].iloc[i] = convert_date(data['Last Known Eruption'].iloc[i])
+for i in range(len(df)):
+    if isinstance(df['Last Known Eruption'].iloc[i], str):
+            df['Last Known Eruption'].iloc[i] = convert_date(df['Last Known Eruption'].iloc[i])
 
 ###################################################################
 
