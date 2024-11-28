@@ -142,7 +142,7 @@ for i in choix_carte :
         st.plotly_chart(fig_emerges, use_container_width=True)
     elif i == cartes[2] :
         # Filtrer les volcans submergés (élévation < 0)
-        data_submerges = data[data['Elevation (Meters)'] < 0]
+        data_submerges = df[df['Elevation (Meters)'] < 0]
         
         # Convertir l'élévation en valeur absolue (profondeur)
         data_submerges["Elevation (Meters)"] = abs(data_submerges["Elevation (Meters)"])
