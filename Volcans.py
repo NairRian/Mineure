@@ -68,6 +68,20 @@ st.markdown("""
  * Ci-dessous apparaissent vos choix
 """)
 
+# Ajouter du CSS personnalisé pour changer la couleur du fond
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background-color: #f0f8ff;  # Couleur de fond de l'application (ici bleu clair)
+    }
+    .sidebar .sidebar-content {
+        background-color: #e6f7ff;  # Couleur de fond de la barre latérale
+    }
+    </style>
+    """, unsafe_allow_html=True
+)
+
 ###################################################################
 
 # configuration de la sidebar
