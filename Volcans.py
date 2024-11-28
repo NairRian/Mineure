@@ -28,7 +28,7 @@ st.write("Nous avons effectué les modifications suivantes : ")
 
 # ANALYSE SELON TYPE DE ROCHES, D'ERUPTION ET DE TECTONIQUE
 # réduire l'excel aux colonnes qui nous intéressent
-data_infos = data[['Type', 'Dominant Rock Type', 'Tectonic Setting']]
+data_infos = df[['Type', 'Dominant Rock Type', 'Tectonic Setting']]
 # créer une liste des éléments dans chaque colonne sans doublons
 liste_type = list(set(data_infos['Type'].values))
 liste_rock = list(set(data_infos['Dominant Rock Type'].values))
