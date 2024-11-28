@@ -95,6 +95,23 @@ if youyou :
     st.write(p, "%", "des volcans de l'Holocène sont aujourd'hui au dessus du niveau de la mer et",p2,"% sont en dessous!")
     st.write("et oui, on voit donc que presque",p0,"% des volcans de l'holocène sont aujourd'hui au niveau de la mer !")
 
+# Créer la carte avec Plotly Express
+fig = px.scatter_mapbox(
+    data, 
+    lat="Latitude", 
+    lon="Longitude", 
+    zoom=1,
+    mapbox_style="carto-positron"  # Remarque : vous pouvez changer le style ici
+)
+fig.update_layout(
+    width=1200,
+    height=800,
+    title_text="Carte de la localisation des volcans de l'Holocène"
+)
+
+# Afficher la carte dans Streamlit
+st.plotly_chart(fig, use_container_width=True)
+
 ###################################################################
 st.sidebar.subheader("Informations volcanologiques pour un pays")
 
