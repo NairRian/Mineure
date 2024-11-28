@@ -13,7 +13,7 @@ from sklearn.datasets import load_wine
 st.title("Les volcans de l'Holocène")
 
 # Chemin du fichier CSV local
-csv_path = "C:\\Users\\camph\\Documents\\Codage\\database.csv"
+csv_path = "./database.csv"
 
 # Lecture du fichier CSV avec pandas
 try:
