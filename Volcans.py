@@ -13,7 +13,7 @@ feature_names = load_wine().feature_names
 st.title("Les volcans de l'Holocène")
 
 # Chemin du fichier CSV local
-csv_path = "C:\Users\camph\Documents\2024-5\S7\database.csv"
+csv_path = "C:/Users/camph/Documents/2024-5/S7/database.csv"
 
 # Lecture du fichier CSV avec pandas
 try:
