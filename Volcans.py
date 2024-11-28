@@ -35,8 +35,6 @@ st.sidebar.markdown("## Choix des graphiques ou map que vous souhaitez afficher 
 # Partie Raph
 st.sidebar.subheader("Lien entre les types de roche, de tectonique et d'éruption")
 
-raph = st.sidebar.checkbox("Afficher le graphique")
-
 # ANALYSE SELON TYPE DE ROCHES, D'ERUPTION ET DE TECTONIQUE
 # réduire l'excel aux colonnes qui nous intéressent
 data_infos = df[['Type', 'Dominant Rock Type', 'Tectonic Setting']]
@@ -55,6 +53,8 @@ type_stats = (
 # demander le binôme
 rock_type = st.sidebar.selectbox("Quel type de roche ?", liste_rock)
 tectonic_setting = st.sidebar.selectbox("Quel cas tectonique ?", liste_tecto)
+raph = st.sidebar.checkbox("Afficher le graphique")
+
 if raph :
     st.write(f"Vous avez choisi : {rock_type} et {tectonic_setting}")
     if (rock_type, tectonic_setting) in type_stats.index:
