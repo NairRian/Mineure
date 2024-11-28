@@ -29,11 +29,12 @@ st.markdown("""
 ###################################################################
 
 # configuration de la sidebar
-st.sidebar.title("## Choix des graphiques ou map que vous souhaitez afficher : ")
+st.sidebar.title("Choix des graphiques ou map que vous souhaitez afficher : ")
 
 ###################################################################
+st.subheader("Lien entre les types de roche, tectonique et éruption")
 
-# PARTIE RAPH
+# PARTIE 1 RAPH
 st.sidebar.subheader("Lien entre les types de roche, de tectonique et d'éruption")
 
 # ANALYSE SELON TYPE DE ROCHES, D'ERUPTION ET DE TECTONIQUE
@@ -50,6 +51,8 @@ type_stats = (
     .rename_axis(['Dominant Rock Type', 'Tectonic Setting', 'Type'])  # Ajouter les intitulés
     .unstack(fill_value=0)  # si valeur nulle
 )
+
+
 # afficher le graphique pour un binôme
 # demander le binôme
 rock_type = st.sidebar.selectbox("Quel type de roche ?", liste_rock)
@@ -84,49 +87,45 @@ if raph :
         print(f"La combinaison indiquée n'existe pas : {rock_type} & {tectonic_setting}")
 
 
+###################################################################
+
+# PARTIE 2 RAPH
+
 # prompt: pour un type d'éruption 'Type', représenter sur un graphique à double entrées (en ordonnée les valeurs de 'Dominant Rock Type', en abscisse les valeurs de 'Tectonic Setting') la probabilité d'occurence
 # en considérant que la probabilité d'occurence est égale à la probabilité que ce binôme 'Dominant Rock Type' et 'Tectonic Setting' donne ce type d'éruption par rapport à tous les types d'éruption qu'il peut former
 
 # demander le type d'éruption
-eruption_type = st.selectbox("Quel type d'éruption ?", liste_type)
-st.write(f"Vous avez choisi : {eruption_type}")
+eruption_type = st.sidebar.selectbox("Quel type d'éruption ?", liste_type)
+raphbis = st.sidebar.checkbox("Afficher la heatmap")
 
-if eruption_type in type_stats.columns:
-    # Calculer les probabilités pour le type d'éruption donné
-    probabilities = type_stats[eruption_type] / type_stats.sum(axis=1) * 100
-
-    st.write("Voici la heatmap obtenue :")
-    # Création de la heatmap
-    probabilities_swap = probabilities.swaplevel()  # Échanger abscisses et ordonnées
-    heatmap_data = probabilities_swap.unstack()  # Transformer en DataFrame pour heatmap
+if raphbis :
+    st.write(f"Vous avez choisi : {eruption_type}")
     
-    fig, ax = plt.subplots(figsize=(12, 8))
-    sns.heatmap(
-        heatmap_data,
-        annot=True,
-        cmap="viridis",
-        fmt=".1f",
-        ax=ax
-    )
-    ax.set_title(f"Probabilité d'occurrence de l'éruption : '{eruption_type}'")
-    ax.set_xlabel("Situation tectonique")
-    ax.set_ylabel("Type de roche")
-    plt.xticks(rotation=45, ha='right')
-    plt.tight_layout()
+    if eruption_type in type_stats.columns:
+        # Calculer les probabilités pour le type d'éruption donné
+        probabilities = type_stats[eruption_type] / type_stats.sum(axis=1) * 100
     
-    # Affichage dans Streamlit
-    st.pyplot(fig)
-else:
-    print(f"Le type d'éruption '{eruption_type}' n'existe pas dans les données.")
+        st.write("Voici la heatmap obtenue :")
+        # Création de la heatmap
+        probabilities_swap = probabilities.swaplevel()  # Échanger abscisses et ordonnées
+        heatmap_data = probabilities_swap.unstack()  # Transformer en DataFrame pour heatmap
+        
+        fig, ax = plt.subplots(figsize=(12, 8))
+        sns.heatmap(
+            heatmap_data,
+            annot=True,
+            cmap="viridis",
+            fmt=".1f",
+            ax=ax
+        )
+        ax.set_title(f"Probabilité d'occurrence de l'éruption : '{eruption_type}'")
+        ax.set_xlabel("Situation tectonique")
+        ax.set_ylabel("Type de roche")
+        plt.xticks(rotation=45, ha='right')
+        plt.tight_layout()
+        
+        # Affichage dans Streamlit
+        st.pyplot(fig)
+    else:
+        print(f"Le type d'éruption '{eruption_type}' n'existe pas dans les données.")
 
-
-
-
-
-#st.dataframe(df.style.highlight_max(axis=0)) surligne la valeur max de la colonne
-#plot =df['alcohol']
-
-#bot = st.checkbox("Afficher le graphique de la colonne alcohol : ")
-#if bot :
-#  st.write('Voici le graphique de la colonne alcohol : ')
-#  st.line_chart(plot)
