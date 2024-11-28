@@ -5,6 +5,16 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import math
 
+
+# DATA
+# Chemin du fichier CSV local
+csv_path = "./database.csv"
+
+# Lecture du fichier CSV avec pandas
+df = pd.read_csv(csv_path)
+
+###################################################################
+
 # configurer la page
 apptitle = "Volcans de l'Holocène - GP5"
 st.set_page_config(page_title=apptitle, page_icon="🌋")
@@ -16,23 +26,14 @@ st.markdown("""
  * Ci-dessous parait vos choix
 """)
 
-# Chemin du fichier CSV local
-csv_path = "./database.csv"
-
-# Lecture du fichier CSV avec pandas
-df = pd.read_csv(csv_path)
-# Affichage des données dans l'application
-st.write("Aperçu des données :")
-st.dataframe(df)
-
-# Optionnel : ajouter des statistiques ou des graphiques
-st.write("Statistiques descriptives :")
-st.write(df.describe())
+###################################################################
 
 # configuration de la sidebar
-st.sidebar.markdown("## Choix des graphiques ou map que vous souhaitez afficher : ")
+st.sidebar.title("## Choix des graphiques ou map que vous souhaitez afficher : ")
 
-# Partie Raph
+###################################################################
+
+# PARTIE RAPH
 st.sidebar.subheader("Lien entre les types de roche, de tectonique et d'éruption")
 
 # ANALYSE SELON TYPE DE ROCHES, D'ERUPTION ET DE TECTONIQUE
