@@ -79,29 +79,28 @@ st.sidebar.subheader("Informations volcanologiques pour un pays")
 #Choix du nom du pays
 liste_pays = list(set(df['Country'].values))
 pays = st.sidebar.selectbox("Quel pays ?", liste_pays)
-data_pays = df[df['Country'] == pays][['Country', 'Type', 'Last Known Eruption', 'Name']]
-#Condition pour si le pays choisi n'est pas dans la database
-if pays in df['Country'].values:
-# Trouver la dernière date d'éruption
-  derniere_eruption = max(data_pays['Last Known Eruption'])
+alex = st.sidebar.checkbox("Afficher infos du pays")
 
-# Récupérer le ou les noms des volcans associés à cette éruption
-  volcans_derniere_eruption = data_pays[data_pays['Last Known Eruption'] == derniere_eruption]['Name']
-
-# Compter les types d'éruption
-  type_eruption = data_pays['Type'].value_counts()
-
-# Affichage des résultats
-  st.write(f"La dernière éruption connue est datée de {derniere_eruption}.")
-  st.write(f"Le(s) volcan(s) associé(s) à cette éruption : {', '.join(volcans_derniere_eruption)}")
-  st.write("Type d'éruptions dans ce pays :\n", type_eruption)
-else:
-    st.write(f"Le pays {pays} n'est pas le jeu de donné.")
-
-
-
-
-
+if alex :
+    st.subheader(f"Informations volcanologiques  : {pays}")
+    data_pays = df[df['Country'] == pays][['Country', 'Type', 'Last Known Eruption', 'Name']]
+    #Condition pour si le pays choisi n'est pas dans la database
+    if pays in df['Country'].values:
+        # Trouver la dernière date d'éruption
+        derniere_eruption = max(data_pays['Last Known Eruption'])
+        
+        # Récupérer le ou les noms des volcans associés à cette éruption
+        volcans_derniere_eruption = data_pays[data_pays['Last Known Eruption'] == derniere_eruption]['Name']
+        
+        # Compter les types d'éruption
+        type_eruption = data_pays['Type'].value_counts()
+        
+        # Affichage des résultats
+        st.write(f"La dernière éruption connue est datée de {derniere_eruption}.")
+        st.write(f"Le(s) volcan(s) associé(s) à cette éruption : {', '.join(volcans_derniere_eruption)}")
+        st.write("Type d'éruptions dans ce pays :\n", type_eruption)
+    else:
+        st.write(f"Le pays {pays} n'est pas le jeu de donné.")
 
 ###################################################################
 st.subheader("Lien entre les types de roche, tectonique et éruption")
