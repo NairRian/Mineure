@@ -3,4 +3,3 @@ streamlit
 scikit-learn
 seaborn
 numpy
-math
