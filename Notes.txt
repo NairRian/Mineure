@@ -1,0 +1,115 @@
+# permet de demander à l'utilisateur d'ajouter lui-même un csv
+uploaded_file = st.file_uploader("Choisissez un fichier CSV", type=["csv"])
+
+
+# demander à l'utilisateur
+#1. Saisie de Texte : st.text_input
+#Permet à l'utilisateur de saisir une chaîne de texte.
+
+import streamlit as st
+
+# Titre
+st.title("Exemple de champ de saisie de texte")
+
+# Champ de texte
+name = st.text_input("Quel est votre nom ?")
+
+# Utiliser l'entrée
+if name:
+    st.write(f"Bonjour, {name} !")
+
+#2. Zone de Texte Multiligne : st.text_area
+#Permet d'entrer plusieurs lignes de texte.
+
+# Zone de texte multiligne
+feedback = st.text_area("Donnez votre avis sur l'application")
+
+if feedback:
+    st.write("Merci pour votre retour :")
+    st.write(feedback)
+
+#3. Nombre : st.number_input
+#Permet de saisir des nombres (entiers ou décimaux).
+
+# Saisie de nombre
+age = st.number_input("Quel âge avez-vous ?", min_value=0, max_value=120, value=25, step=1)
+
+st.write(f"Votre âge : {age}")
+
+#4. Sélection parmi des Options : st.selectbox
+#Permet de choisir une option parmi une liste déroulante.
+
+# Liste déroulante
+options = ["Python", "JavaScript", "C++", "Java"]
+language = st.selectbox("Quel est votre langage préféré ?", options)
+
+st.write(f"Vous avez choisi : {language}")
+
+#5. Boutons Radio : st.radio
+#Permet de sélectionner une option parmi un petit nombre d'alternatives.
+
+# Boutons radio
+genre = st.radio("Quel est votre genre ?", ["Homme", "Femme", "Autre"])
+
+st.write(f"Vous avez sélectionné : {genre}")
+
+#6. Case à Cocher : st.checkbox
+#Permet une entrée booléenne (vrai ou faux).
+
+# Case à cocher
+agree = st.checkbox("J'accepte les termes et conditions")
+
+if agree:
+    st.write("Merci d'avoir accepté !")
+
+#7. Choix Multiple : st.multiselect
+#Permet de sélectionner plusieurs options dans une liste.
+
+# Choix multiple
+hobbies = st.multiselect(
+    "Quels sont vos passe-temps ?", 
+    ["Lecture", "Sport", "Voyage", "Musique"]
+)
+
+st.write("Vos passe-temps :", hobbies)
+
+#8. Curseur : st.slider
+#Permet de sélectionner une valeur dans une plage donnée (peut être un nombre ou une date).
+
+# Curseur pour un nombre
+temperature = st.slider("Sélectionnez une température", min_value=-10, max_value=40, value=20)
+
+st.write(f"Température choisie : {temperature}°C")
+
+#9. Téléversement de Fichier : st.file_uploader
+#Permet à l'utilisateur d'importer un fichier (par exemple, CSV, image).
+
+# Téléversement de fichier
+uploaded_file = st.file_uploader("Téléversez un fichier", type=["csv", "txt"])
+
+if uploaded_file is not None:
+    st.write("Fichier chargé avec succès !")
+    st.write(uploaded_file.name)
+
+#10. Saisie de Date : st.date_input
+#Permet de sélectionner une date.
+
+# Saisie de date
+birth_date = st.date_input("Quelle est votre date de naissance ?")
+
+st.write(f"Votre date de naissance est : {birth_date}")
+
+#11. Saisie de Temps : st.time_input
+#Permet de sélectionner une heure.
+
+# Saisie de temps
+meeting_time = st.time_input("À quelle heure avez-vous votre réunion ?", value=None)
+
+st.write(f"Votre réunion est à : {meeting_time}")
+
+#12. Bouton : st.button
+"Un bouton simple qui exécute une action lorsqu'il est cliqué.
+
+# Bouton
+if st.button("Cliquez ici"):
+    st.write("Bouton cliqué !")
