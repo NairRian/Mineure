@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import math
 
 # configurer la page
-apptitle = "Volcans de l'Holocène - GP5")
+apptitle = "Volcans de l'Holocène - GP5"
 st.set_page_config(page_title=apptitle, page_icon="🌋")
 
 st.title("Les volcans de l'Holocène")
