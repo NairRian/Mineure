@@ -5,9 +5,16 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import math
 
+# configurer la page
+apptitle = "Volcans de l'Holocène - GP5")
+st.set_page_config(page_title=apptitle, page_icon="🌋")
+
 st.title("Les volcans de l'Holocène")
 
-st.write("Exposer nos idées : ")
+st.markdown("""
+ * Utiliser le menu pour choisir ce que vous souhaitez afficher
+ * Ci-dessous parait vos choix
+""")
 
 # Chemin du fichier CSV local
 csv_path = "./database.csv"
