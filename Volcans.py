@@ -148,7 +148,7 @@ for i in choix_carte :
         data_submerges["Elevation (Meters)"] = abs(data_submerges["Elevation (Meters)"])
         
         # Renommer la colonne pour la rendre plus claire
-        data_submerges = data_submerges.rename(columns={"Elevation (Meters)": "Profondeur du volcan (par rapport au niveau de la mer)"})
+        data_submerges = data_submerges.rename(columns={"Elevation (Meters)": "Profondeur du volcan \n(par rapport au niveau de la mer)"})
         
         # Convertir la colonne en type float (pour assurer que ce soit un nombre flottant)
         data_submerges["Profondeur du volcan (par rapport au niveau de la mer)"] = data_submerges["Profondeur du volcan (par rapport au niveau de la mer)"].apply(float)
