@@ -44,8 +44,12 @@ type_stats
 
 # afficher le graphique pour un binôme
 # demander le binôme
-rock_type = input("Quel type de roche ? attention à respecter l'écriture correcte : ")
-tectonic_setting = input("Quel cas tectonique ? attention à respecter l'écriture correcte : ")
+#rock_type = input("Quel type de roche ? attention à respecter l'écriture correcte : ")
+#tectonic_setting = input("Quel cas tectonique ? attention à respecter l'écriture correcte : ")
+
+rock_type = st.selectbox("Quel type de roche ?", liste_rock)
+tectonic_setting = st.selectbox("Quel cas tectonique ?", liste_tecto)
+st.write(f"Vous avez choisi : {rock_type} et {tectonic_setting}")
 
 if (rock_type, tectonic_setting) in type_stats.index:
   type_counts = type_stats.loc[(rock_type, tectonic_setting)] # loc permet de créer un tableau qui répertorie les types de roche et leur itération
