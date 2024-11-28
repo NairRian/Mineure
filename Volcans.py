@@ -75,14 +75,13 @@ st.sidebar.title("Choix des informations que vous souhaitez afficher : ")
 st.sidebar.subheader("Informations volcanologiques pour un pays")
 
 # PARTIE ALEXANDRE
-
+st.subheader(f"Informations volcanologiques  : {pays}")
 #Choix du nom du pays
 liste_pays = list(set(df['Country'].values))
 pays = st.sidebar.selectbox("Quel pays ?", liste_pays)
 alex = st.sidebar.checkbox("Afficher infos du pays")
 
 if alex :
-    st.subheader(f"Informations volcanologiques  : {pays}")
     data_pays = df[df['Country'] == pays][['Country', 'Type', 'Last Known Eruption', 'Name']]
     #Condition pour si le pays choisi n'est pas dans la database
     if pays in df['Country'].values:
