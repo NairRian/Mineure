@@ -92,11 +92,11 @@ if pays in df['Country'].values:
   type_eruption = data_pays['Type'].value_counts()
 
 # Affichage des résultats
-  print(f"La dernière éruption connue est datée de {derniere_eruption}.")
-  print(f"Le(s) volcan(s) associé(s) à cette éruption : {', '.join(volcans_derniere_eruption)}")
-  print("Type d'éruptions dans ce pays :\n", type_eruption)
+  st.write(f"La dernière éruption connue est datée de {derniere_eruption}.")
+  st.write(f"Le(s) volcan(s) associé(s) à cette éruption : {', '.join(volcans_derniere_eruption)}")
+  st.write("Type d'éruptions dans ce pays :\n", type_eruption)
 else:
-    print(f"Le pays {pays} n'est pas le jeu de donné.")
+    st.write(f"Le pays {pays} n'est pas le jeu de donné.")
 
 
 
@@ -156,7 +156,7 @@ if raph :
         # Affichage dans Streamlit
         st.pyplot(fig)
     else:
-        print(f"La combinaison indiquée n'existe pas : {rock_type} & {tectonic_setting}")
+        st.write(f"La combinaison indiquée n'existe pas : {rock_type} & {tectonic_setting}")
 
 
 ###################################################################
@@ -199,5 +199,5 @@ if raphbis :
         # Affichage dans Streamlit
         st.pyplot(fig)
     else:
-        print(f"Le type d'éruption '{eruption_type}' n'existe pas dans les données.")
+        st.write(f"Le type d'éruption '{eruption_type}' n'existe pas dans les données.")
 
