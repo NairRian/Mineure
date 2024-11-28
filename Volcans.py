@@ -85,16 +85,27 @@ if eruption_type in type_stats.columns:
     # Calculer les probabilités pour le type d'éruption donné
     probabilities = type_stats[eruption_type] / type_stats.sum(axis=1) * 100
 
-    # Créer la heatmap
-    plt.figure(figsize=(12, 8))
-    probabilities_swap = probabilities.swaplevel() # échanger abscisses et ordonnées
-    sns.heatmap(probabilities_swap.unstack(), annot=True, cmap="viridis", fmt=".1f")
-    plt.title(f"Probabilité d'occurrence de l'éruption '{eruption_type}'")
-    plt.xlabel("Tectonic Setting")
-    plt.ylabel("Dominant Rock Type")
+    st.write("Voici la heatmap obtenue :")
+    # Création de la heatmap
+    probabilities_swap = probabilities.swaplevel()  # Échanger abscisses et ordonnées
+    heatmap_data = probabilities_swap.unstack()  # Transformer en DataFrame pour heatmap
+    
+    fig, ax = plt.subplots(figsize=(12, 8))
+    sns.heatmap(
+        heatmap_data,
+        annot=True,
+        cmap="viridis",
+        fmt=".1f",
+        ax=ax
+    )
+    ax.set_title(f"Probabilité d'occurrence de l'éruption : '{eruption_type}'")
+    ax.set_xlabel("Situation tectonique")
+    ax.set_ylabel("Type de roche")
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
-    plt.show()
+    
+    # Affichage dans Streamlit
+    st.pyplot(fig)
 else:
     print(f"Le type d'éruption '{eruption_type}' n'existe pas dans les données.")
 
