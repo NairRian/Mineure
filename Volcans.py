@@ -56,17 +56,21 @@ if (rock_type, tectonic_setting) in type_stats.index:
     for i in type_counts.index:  # Parcourir les index
         type_counts[i] = type_counts[i] / tot * 100
     
-    # Create a bar plot
-    plt.figure(figsize=(10, 6))
-    type_counts.plot(kind='bar')
-    plt.title(f"Distribution des types d'éruption pour la combinaison : {rock_type} & {tectonic_setting}")
-    plt.xlabel("Type d'éruption")
-    plt.xticks(rotation=45, ha='right')
-    plt.ylabel('Pourcentrage de distribution')
-    plt.ylim(0, 100)
-    plt.yticks(range(0,101,10))
+    st.write(f"Distribution des types d'éruption pour la combinaison : {rock_type} & {tectonic_setting}")
+
+    # Création du graphique Matplotlib
+    fig, ax = plt.subplots(figsize=(10, 6))
+    type_counts.plot(kind='bar', ax=ax)
+    ax.set_title(f"Distribution des types d'éruption pour la combinaison : {rock_type} & {tectonic_setting}")
+    ax.set_xlabel("Type d'éruption")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
+    ax.set_ylabel("Pourcentage de distribution")
+    ax.set_ylim(0, 100)
+    ax.set_yticks(range(0, 101, 10))
     plt.tight_layout()
-    plt.show()
+    
+    # Affichage dans Streamlit
+    st.pyplot(fig)
 else:
     print(f"La combinaison indiquée n'existe pas : {rock_type} & {tectonic_setting}")
 
