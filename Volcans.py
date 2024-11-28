@@ -29,6 +29,33 @@ st.dataframe(df)
 st.write("Statistiques descriptives :")
 st.write(df.describe())
 
+# configuration de la sidebar
+st.sidebar.markdown("## Choix des graphiques ou map que vous souhaitez afficher : ")
+st.sidebar.subheader("Lien entre les types de roche, de tectonique et d'éruption")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # afficher la version traitée du document
 st.write("Nous avons effectué les modifications suivantes : ")
 # dff = modif de df
