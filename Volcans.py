@@ -14,6 +14,46 @@ csv_path = "./database.csv"
 df = pd.read_csv(csv_path)
 
 ###################################################################
+# transformation du fichier
+
+#Parcourir la colonne 'Type' dans le dataframe data, pour chaque valeur texte finissant par '(s)' ou '(es)', supprimer '(s)' ou '(es)'
+# attention si l'information n'est pas renseignée, erreur : ajouter condition vérifiant que c un string
+suffixes = ['(s)', '(es)', '?']  # Liste des suffixes à supprimer
+
+for i in range(len(data)):
+    if isinstance(data['Type'].iloc[i], str):
+        for suffix in suffixes:
+            if data['Type'].iloc[i].endswith(suffix):
+                data['Type'].iloc[i] = data['Type'].iloc[i].replace(suffix, '')
+
+# changer les dates
+
+def convert_date(date_str):
+    if isinstance(date_str, str):
+        if 'BCE' in date_str:
+            try:
+                year = int(date_str.split(' BCE')[0])
+                return -year
+            except ValueError:
+                return np.nan
+        elif 'CE' in date_str:
+            try:
+                year = int(date_str.split(' CE')[0])
+                return year
+            except ValueError:
+                return np.nan
+        else:
+            try:
+                year = int(date_str)
+                return year
+            except ValueError:
+                return np.nan
+    return np.nan
+for i in range(len(data)):
+    if isinstance(data['Last Known Eruption'].iloc[i], str):
+            data['Last Known Eruption'].iloc[i] = convert_date(data['Last Known Eruption'].iloc[i])
+
+###################################################################
 
 # configurer la page
 apptitle = "Volcans de l'Holocène - GP5"
