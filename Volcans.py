@@ -101,7 +101,7 @@ fig = px.scatter_mapbox(
     lat="Latitude", 
     lon="Longitude", 
     zoom=1,
-    mapbox_style="carto-darkmatter"  # Remarque : vous pouvez changer le style ici
+    mapbox_style="stamen-toner"  # Remarque : vous pouvez changer le style ici
 )
 fig.update_layout(
     width=1200,
