@@ -101,11 +101,11 @@ fig = px.scatter_mapbox(
     lat="Latitude", 
     lon="Longitude", 
     zoom=1,
-    mapbox_style="carto-positron"  # Remarque : vous pouvez changer le style ici
+    mapbox_style="carto-darkmatter"  # Remarque : vous pouvez changer le style ici
 )
 fig.update_layout(
-    width=1500,
-    height=750,
+    width=1200,
+    height=800,
     title_text="Carte de la localisation des volcans de l'Holocène"
 )
 
