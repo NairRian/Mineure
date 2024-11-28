@@ -94,6 +94,9 @@ if st.sidebar.checkbox("Afficher la répartition des volcans par rapport au nive
     st.write(p, "%", "des volcans de l'Holocène sont aujourd'hui au dessus du niveau de la mer et",p2,"% sont en dessous!")
     st.write("et oui, on voit donc que presque",p0,"% des volcans de l'holocène sont aujourd'hui au niveau de la mer !")
 
+cartes = st.multiselect("Quelles cartes souhaitez-vous afficher ?", ["Carte générale", "Carte des volcans submergés", "Carte des volcans émergés", "Carte des volcans au niveau de la mer"])
+
+
 if st.sidebar.checkbox("Afficher la cartes des volcans de l'Holocène") :
     # Créer la carte avec Plotly Express
     fig = px.scatter_mapbox(
