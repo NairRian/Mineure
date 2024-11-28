@@ -126,7 +126,7 @@ for i in choix_carte :
             size="Elevation (Meters)", 
             color="Elevation (Meters)",
             color_continuous_scale=px.colors.cyclical.IceFire, 
-            size_max=15, 
+            size_max=5, 
             zoom=1,
             mapbox_style="carto-positron"  # Style de carte
         )
